@@ -11,12 +11,13 @@ This repository is a final project (Java GUI) from Object-Oriented Programming C
 | ------------- |-------------------------|
 | 140810190043  | Marvin Luckianto        |
 | 140810190047  | Matthew Felix Ristanto  |
-| 140810190063  | Ananda Sapta Awedana    |
+| 140810190063  | Ananda Sapta Awedhana   |
 
 ## Change log
 - **[Sprint Planning](changelog/sprint-planning.md) - (planning date)** 
-   -  Short changes 1
-   - Short changes 2
+   - Create the board
+   - Create snake object
+   - Snake move function
 
 - **[Sprint 1](changelog/sprint-1.md) - (date from x until x)** 
    - Short changes 1
