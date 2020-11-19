@@ -16,7 +16,7 @@
 | 1.3 | S n e c c Movement                             | Marvin  |
 | 2.1 | Create the object Æ p e l                      | Ananda  |
 | 2.2 | Create Æ p e l spawn Randomize                 | M & M   |
-| 3.1 | Count the score based on the Æ p e l           | Amanda  |
+| 3.1 | Count the score based on the Æ p e l           | Ananda  |
 | 3.2 | Create instruction screen                      | Matthew |
 | 3.3 | Create credits & Scoreboard/Leaderboard screen | Marvin  |
 
