@@ -9,12 +9,12 @@ public class Main extends JFrame{
     Main() {
         
         add(new Boardgame());
-        setBounds(460,50,1000,980);
-        setBackground(Color.GRAY);
+        // setBounds(460,50,1000,980);
+        // setBackground(Color.GRAY);
         setTitle("Snake");
-        getContentPane().setBackground(Color.GRAY);
         setResizable(false);
-        setVisible(true);
+        pack();
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
