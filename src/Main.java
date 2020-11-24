@@ -3,12 +3,12 @@ import java.awt.Color;
 import javax.swing.JFrame;
 
 import java.awt.EventQueue;
-public class Main extends JFrame{
 
+public class Main extends JFrame {
 
     Main() {
-        
-        add(new Boardgame());
+
+        add(new Board());
         // setBounds(460,50,1000,980);
         // setBackground(Color.GRAY);
         setTitle("Snake");
