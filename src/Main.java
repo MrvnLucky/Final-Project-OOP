@@ -1,7 +1,4 @@
-import java.awt.Color;
-
 import javax.swing.JFrame;
-
 import java.awt.EventQueue;
 
 public class Main extends JFrame {

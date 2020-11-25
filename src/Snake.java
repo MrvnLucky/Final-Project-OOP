@@ -1,17 +1,16 @@
 public class Snake {
-
-  // Stores the joints / body part locations for our snake
+  // Inisiasi letak snake
   private final int[] x = new int[Board.getAllDots()];
   private final int[] y = new int[Board.getAllDots()];
 
-  // Stores direction of snake
+  // Inisiasi gerakan snake
   private boolean movingLeft = false;
   private boolean movingRight = false;
   private boolean movingUp = false;
   private boolean movingDown = false;
 
-  private int joints = 0; // Stores # of dots / joints the snake has (starts
-                          // with 3)
+  // Inisiasi jumlah awal badan snake
+  private int joints = 0;
 
   public int getSnakeX(int index) {
     return x[index];
@@ -70,7 +69,7 @@ public class Snake {
   }
 
   public void move() {
-    // Move the joints up from the tail to the head by one
+    // Menggerakkan badan snake dari ke head
     for (int i = joints; i > 0; i++) {
       x[i] = x[(i - 1)];
       y[i] = y[(i - 1)];
