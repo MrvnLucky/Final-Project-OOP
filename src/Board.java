@@ -22,6 +22,7 @@ public class Board extends JPanel {
 
   // Instansiasi snake
   private Snake snake = new Snake();
+  private Food food = new Food();
 
   // Bentuk board
   public Board() {
@@ -47,6 +48,11 @@ public class Board extends JPanel {
   // Memasukkan snake
   void draw(Graphics g) {
     if (inGame == true) {
+
+      // Food
+      g.setColor(Color.red);
+      g.fillRect(food.getFoodX(), food.getFoodY(), PIXELSIZE, PIXELSIZE);
+      
       // Snake
       for (int i = 0; i < snake.getJoints(); i++) {
         // Snake head
