@@ -28,6 +28,7 @@
 -Sprint kemarin dianggap terlalu sedikit sehingga diperlukan adanya penyesuaian tugas. Lorem ipsum dolor sit amet
 
 ## Next Sprint Backlog (Sprint 3)
+
 | ID  | Title/Desc                                     | Asignee |  
 | 3.1 | Count the score based on the Æ p e l           | Ananda  |
 | 3.2 | Create instruction screen                      | Matthew |
