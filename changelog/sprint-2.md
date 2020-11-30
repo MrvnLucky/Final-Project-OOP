@@ -30,7 +30,7 @@
 ## Next Sprint Backlog (Sprint 3)
 
 | ID  | Title/Desc                                     | Asignee |  
+| --- | ---------------------------------------------- | ------- |  
 | 3.1 | Count the score based on the Æ p e l           | Ananda  |
 | 3.2 | Create instruction screen                      | Matthew |
 | 3.3 | Create credits & Scoreboard/Leaderboard screen | Marvin  |
-
