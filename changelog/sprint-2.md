@@ -1,7 +1,7 @@
 # Scrum Report (Sprint 2)
 | From 27/11/2020 to 01/12/2020
 
-## Team (Insert your name)
+## Team (Snecc Menn)
 | NPM           | Name                   |
 | ------------- |------------------------|
 | 140810190043  | Marvin Luckianto       |
