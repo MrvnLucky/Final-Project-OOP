@@ -80,7 +80,47 @@ public class Board extends JPanel {
       snake.setSnakeX(BOARDWIDTH / 2);
       snake.setSnakeY(BOARDHEIGHT / 2);
     }
+
+    //Membuat makanan untuk pertama kali (Saat Memulai Game)
+    food.createFood();
   }
+
+  // Kondisi untuk memeriksa apabila S n e c c hampir mengambil makanan
+void checkFoodCollisions() {
+
+  if ((proximity(snake.getSnakeX(0), food.getFoodX(), 20))
+          && (proximity(snake.getSnakeY(0), food.getFoodY(), 20))) {
+
+      System.out.println("intersection");
+      // Menambah ruas dari tubuh si S n e c c
+      snake.setJoints(snake.getJoints() + 1);
+      // Membuat makanan baru setelah di makan oleh S n e c c
+      food.createFood();
+  }
+}
+
+  // Fungsi untuk memeriksa apabila S n e c c menabrak ruas badannya atau tembok
+void checkCollision(){
+  
+  //kondisi apabila S n e c c menabrak tubuhnya sendiri
+  for (int i = snake.getJoints(); i > 0; i--) {
+
+    // S n e c c tidak dapat menabrak tubuhnya sendiri jika panjang tubuhnya 
+    // tidak lebih besar dari 5
+    if ((i > 5)
+            && (snake.getSnakeX(0) == snake.getSnakeX(i) && (snake
+                    .getSnakeY(0) == snake.getSnakeY(i)))) {
+        inGame = false; // Game Berakhir
+      }
+  }
+  
+  //Kondisi apabila S n e c c menabrak tembok
+  if (snake.getSnakeY(0) >= BOARDHEIGHT){
+    inGame = false; // Game berakhir
+  }
+
+}
+
 
   // Method untuk mengambil total pixel yang ada
   public static int getAllDots() {
