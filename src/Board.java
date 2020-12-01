@@ -191,6 +191,18 @@ public class Board extends JPanel {
   public void actionPerformed(ActionEvent e) {
     if (inGame == true) {
 
+      checkFoodCollisions();
+      checkCollisions();
+      snake.move();
+
+      System.out
+          .println(snake.getSnakeX(0) + " " + snake.getSnakeY(0) + " " + food.getFoodX() + ", " + food.getFoodY());
     }
+    // Repaint or 'render' our screen
+    repaint();
+  }
+
+  private boolean proximity(int a, int b, int closeness) {
+    return Math.abs((long) a - b) <= closeness;
   }
 }
