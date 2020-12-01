@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Toolkit;
 import javax.swing.JPanel;
 import java.awt.event.ActionListener;
@@ -9,12 +11,13 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.Timer;
 
+@SuppressWarnings("serial")
 public class Board extends JPanel implements ActionListener {
   // TODO: Implement a way for the player to win
 
   // Memberikan lebar dan tinggi board
-  private final static int BOARDWIDTH = 800;
-  private final static int BOARDHEIGHT = 800;
+  private final static int BOARDWIDTH = 1000;
+  private final static int BOARDHEIGHT = 1000;
 
   // Memberikan ukuran pixel
   private final static int PIXELSIZE = 25;
@@ -25,22 +28,27 @@ public class Board extends JPanel implements ActionListener {
   // Memberikan kondisi awal kalau game sedang berlangsung
   private boolean inGame = true;
 
+  // Timer untuk mengukur tick dari game
+  private Timer timer;
+
+  // Set speed game snake, semakin kecil angka semakin cepat snake jalan
+  private static int speed = 45;
+
   // Instansiasi snake
   private Snake snake = new Snake();
 
   // Instansiasi food
   private Food food = new Food();
 
-  // Timer untuk mengukur tick dari game
-  private Timer timer;
-
   // Bentuk board
   public Board() {
     // setBounds(90,75,800,800);
+    addKeyListener(new Keys());
     setBackground(Color.BLACK);
     setFocusable(true);
+
     setPreferredSize(new Dimension(BOARDWIDTH, BOARDHEIGHT));
-    addKeyListener(new Keys());
+
     initializeGame();
   }
 
@@ -61,14 +69,14 @@ public class Board extends JPanel implements ActionListener {
     if (inGame == true) {
 
       // Food
-      g.setColor(Color.red);
+      g.setColor(Color.RED);
       g.fillRect(food.getFoodX(), food.getFoodY(), PIXELSIZE, PIXELSIZE);
 
       // Snake
       for (int i = 0; i < snake.getJoints(); i++) {
         // Snake head
         if (i == 0) {
-          g.setColor(Color.orange);
+          g.setColor(Color.GREEN);
           g.fillRect(snake.getSnakeX(i), snake.getSnakeY(i), PIXELSIZE, PIXELSIZE);
           // Tubuh Snake
         } else {
@@ -79,6 +87,7 @@ public class Board extends JPanel implements ActionListener {
       // Mensinkronkan graphics
       Toolkit.getDefaultToolkit().sync();
     } else {
+      endGame(g);
     }
   }
 
@@ -92,81 +101,20 @@ public class Board extends JPanel implements ActionListener {
       snake.setSnakeY(BOARDHEIGHT / 2);
     }
 
+    // Mulai snake bergerak ke kanan
+    snake.setMovingRight(true);
+
     // Membuat makanan untuk pertama kali (Saat Memulai Game)
     food.createFood();
-  }
 
-  // Fungsi untuk memeriksa apabila S n e c c menabrak ruas badannya atau tembok
-  void checkCollision() {
-
-    // kondisi apabila S n e c c menabrak tubuhnya sendiri
-    for (int i = snake.getJoints(); i > 0; i--) {
-
-      // S n e c c tidak dapat menabrak tubuhnya sendiri jika panjang tubuhnya
-      // tidak lebih besar dari 5
-      if ((i > 5) && (snake.getSnakeX(0) == snake.getSnakeX(i) && (snake.getSnakeY(0) == snake.getSnakeY(i)))) {
-        inGame = false; // Game Berakhir
-      }
-    }
-
-    // Kondisi apabila S n e c c menabrak tembok
-    if (snake.getSnakeY(0) >= BOARDHEIGHT) {
-      inGame = false; // Game berakhir
-    }
-
+    // Set timer untuk mengukur tick dalam game
+    timer = new Timer(speed, this);
+    timer.start();
   }
 
   // Method untuk mengambil total pixel yang ada
   public static int getAllDots() {
     return TOTALPIXELS;
-  }
-
-  // Method untuk mengambil ukuran pixel
-  public static int getDotSize() {
-    return PIXELSIZE;
-  }
-
-  private class Keys extends KeyAdapter {
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-
-      int key = e.getKeyCode();
-
-      if ((key == KeyEvent.VK_LEFT) && (!snake.isMovingRight())) {
-        snake.setMovingLeft(true);
-        snake.setMovingUp(false);
-        snake.setMovingDown(false);
-      }
-
-      if ((key == KeyEvent.VK_RIGHT) && (!snake.isMovingLeft())) {
-        snake.setMovingRight(true);
-        snake.setMovingUp(false);
-        snake.setMovingDown(false);
-      }
-
-      if ((key == KeyEvent.VK_UP) && (!snake.isMovingDown())) {
-        snake.setMovingUp(true);
-        snake.setMovingRight(false);
-        snake.setMovingLeft(false);
-      }
-
-      if ((key == KeyEvent.VK_DOWN) && (!snake.isMovingUp())) {
-        snake.setMovingDown(true);
-        snake.setMovingRight(false);
-        snake.setMovingLeft(false);
-      }
-
-      if ((key == KeyEvent.VK_SPACE) && (inGame == false)) {
-        inGame = true;
-        snake.setMovingDown(false);
-        snake.setMovingRight(false);
-        snake.setMovingLeft(false);
-        snake.setMovingUp(false);
-
-        initializeGame();
-      }
-    }
   }
 
   void checkFoodCollisions() {
@@ -216,6 +164,12 @@ public class Board extends JPanel implements ActionListener {
     }
   }
 
+  // Method untuk mengambil ukuran pixel
+  public static int getDotSize() {
+    return PIXELSIZE;
+  }
+
+  @Override
   public void actionPerformed(ActionEvent e) {
     if (inGame == true) {
 
@@ -228,6 +182,69 @@ public class Board extends JPanel implements ActionListener {
     }
     // Repaint or 'render' our screen
     repaint();
+  }
+
+  private class Keys extends KeyAdapter {
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+      int key = e.getKeyCode();
+
+      if ((key == KeyEvent.VK_LEFT) && (!snake.isMovingRight())) {
+        snake.setMovingLeft(true);
+        snake.setMovingUp(false);
+        snake.setMovingDown(false);
+      }
+
+      if ((key == KeyEvent.VK_RIGHT) && (!snake.isMovingLeft())) {
+        snake.setMovingRight(true);
+        snake.setMovingUp(false);
+        snake.setMovingDown(false);
+      }
+
+      if ((key == KeyEvent.VK_UP) && (!snake.isMovingDown())) {
+        snake.setMovingUp(true);
+        snake.setMovingRight(false);
+        snake.setMovingLeft(false);
+      }
+
+      if ((key == KeyEvent.VK_DOWN) && (!snake.isMovingUp())) {
+        snake.setMovingDown(true);
+        snake.setMovingRight(false);
+        snake.setMovingLeft(false);
+      }
+
+      if ((key == KeyEvent.VK_SPACE) && (inGame == false)) {
+        inGame = true;
+        snake.setMovingDown(false);
+        snake.setMovingRight(false);
+        snake.setMovingLeft(false);
+        snake.setMovingUp(false);
+
+        initializeGame();
+      }
+    }
+  }
+
+  void endGame(Graphics g) {
+
+    // Create a message telling the player the game is over
+    String message = "Game over";
+
+    // Create a new font instance
+    Font font = new Font("Times New Roman", Font.BOLD, 14);
+    FontMetrics metrics = getFontMetrics(font);
+
+    // Set the color of the text to red, and set the font
+    g.setColor(Color.red);
+    g.setFont(font);
+
+    // Draw the message to the board
+    g.drawString(message, (BOARDWIDTH - metrics.stringWidth(message)) / 2, BOARDHEIGHT / 2);
+
+    System.out.println("Game Ended");
+
   }
 
   private boolean proximity(int a, int b, int closeness) {

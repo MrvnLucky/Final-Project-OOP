@@ -70,7 +70,7 @@ public class Snake {
 
   public void move() {
     // Menggerakkan badan snake dari ke head
-    for (int i = joints; i > 0; i++) {
+    for (int i = joints; i > 0; i--) {
       x[i] = x[(i - 1)];
       y[i] = y[(i - 1)];
     }
@@ -82,10 +82,10 @@ public class Snake {
       x[0] += Board.getDotSize();
     }
     if (movingUp) {
-      y[0] += Board.getDotSize();
+      y[0] -= Board.getDotSize();
     }
     if (movingDown) {
-      y[0] -= Board.getAllDots();
+      y[0] += Board.getDotSize();
     }
   }
 }
