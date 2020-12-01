@@ -11,21 +11,21 @@
 ## Sprint Overview
 | Planned (n)   | Completed (n) |
 | ------------- |-------------- |
-| 3             | n             |
+| 3             | 3             |
 
 ## Sprint 2 Backlog
 
-| ID  | Title/Desc                                     | Asignee |  
-| --- | ---------------------------------------------- | ------- |  
-| 2.1 | Create the object Æ p e l                      | Ananda  |
-| 2.2 | Create Æ p e l spawn Randomize                 | Matthew |
-| 2.3 | Create Keyboard input function                 | Marvin  |  
+| ID  | Title/Desc                                     | Asignee | Status | 
+| --- | ---------------------------------------------- | ------- | ------ | 
+| 2.1 | Create the object Æ p e l                      | Ananda  |  DONE  |
+| 2.2 | Create Æ p e l spawn Randomize                 | Matthew |  DONE  |
+| 2.3 | Create Keyboard input function                 | Marvin  |  DONE  |  
 
 ## Retrospective 
 
--Sprint kemarin dianggap terlalu sedikit sehingga diperlukan adanya penyesuaian tugas. Lorem ipsum dolor sit amet
--Sprint kemarin dianggap terlalu sedikit sehingga diperlukan adanya penyesuaian tugas. Lorem ipsum dolor sit amet
--Sprint kemarin dianggap terlalu sedikit sehingga diperlukan adanya penyesuaian tugas. Lorem ipsum dolor sit amet
+- Sulit menentukan rasio ukuran randomisasi lokasi object food sehingga memungkinan object food muncul diluar board
+- Kondisi pergerakkan snake kurang spesifik , contohnya snake dapat berbalik arah pada sel yg sama.
+- if statement randomisasi createFood masih bisa memunculkan food pada satu sel yang sama dengan tubuh snake yang bukan kepala
 
 ## Next Sprint Backlog (Sprint 3)
 
