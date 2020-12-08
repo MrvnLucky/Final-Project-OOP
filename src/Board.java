@@ -242,7 +242,16 @@ public class Board extends JPanel implements ActionListener {
 
     // Create a message telling the player the game is over
     String message = "Game over !";
-    String scoreMsg = "Score : " + score.getScore();
+    String scoreMsg = "Your score : " + score.getScore();
+    String leaderMsg = "Leader Board : ";
+    String[] leaderScoreMsg = new String[3];
+
+    for (int i = 0; i < score.getLeader().size(); i++) {
+      leaderScoreMsg[i] = "Rank " + (i + 1) + " : " + String.valueOf(score.getLeader().get(i));
+      if (i == 2) {
+        break;
+      }
+    }
 
     // Create a new font instance
     Font font = new Font("Times New Roman", Font.BOLD, 14);
@@ -253,10 +262,22 @@ public class Board extends JPanel implements ActionListener {
     g.setFont(font);
 
     // Draw the message to the board
-    g.drawString(message, (BOARDWIDTH - metrics.stringWidth(message)) / 2, BOARDHEIGHT / 2);
-    g.drawString(scoreMsg, (BOARDWIDTH - metrics.stringWidth(scoreMsg)) / 2, (BOARDHEIGHT / 5 * 3));
+    g.drawString(message, (BOARDWIDTH - metrics.stringWidth(message)) / 2, 100);
+
+    g.drawString(leaderMsg, (BOARDWIDTH - metrics.stringWidth(leaderMsg)) / 2, 280);
+
+    score.saveScore();
+    for (int i = 0; i < score.getLeader().size(); i++) {
+      g.drawString(leaderScoreMsg[i], (BOARDWIDTH - metrics.stringWidth(leaderScoreMsg[i])) / 2, 300 + (i * 20));
+      if (i == 2) {
+        break;
+      }
+    }
+
+    g.drawString(scoreMsg, (BOARDWIDTH - metrics.stringWidth(scoreMsg)) / 2, 500);
 
     System.out.println("Game Ended");
+
   }
 
   private boolean proximity(int a, int b, int closeness) {
