@@ -5,7 +5,7 @@ public class Food {
     private int foodY; // Memberikan letak Y food
 
     // Used to determine random position of food
-    private final int RANDOMPOSITION = 40;
+    private final int RANDOMPOSITION = 100;
 
     public int getFoodX() {
         return foodX;
