@@ -188,8 +188,8 @@ public class Board extends JPanel implements ActionListener {
       checkCollisions();
       snake.move();
 
-      System.out.println(snake.getSnakeX(0) + " " + snake.getSnakeY(0) + " " + food.getFoodX() + ", " + food.getFoodY()
-          + " " + score.getScore());
+      System.out.println("(" + snake.getSnakeX(0) + "," + snake.getSnakeY(0) + ") (" + food.getFoodX() + ","
+          + food.getFoodY() + ") " + score.getScore());
     }
     // Repaint or 'render' our screen
     repaint();
@@ -241,7 +241,8 @@ public class Board extends JPanel implements ActionListener {
   void endGame(Graphics g) {
 
     // Create a message telling the player the game is over
-    String message = "Game over";
+    String message = "Game over !";
+    String scoreMsg = "Score : " + score.getScore();
 
     // Create a new font instance
     Font font = new Font("Times New Roman", Font.BOLD, 14);
@@ -253,6 +254,7 @@ public class Board extends JPanel implements ActionListener {
 
     // Draw the message to the board
     g.drawString(message, (BOARDWIDTH - metrics.stringWidth(message)) / 2, BOARDHEIGHT / 2);
+    g.drawString(scoreMsg, (BOARDWIDTH - metrics.stringWidth(scoreMsg)) / 2, (BOARDHEIGHT / 5 * 3));
 
     System.out.println("Game Ended");
   }
