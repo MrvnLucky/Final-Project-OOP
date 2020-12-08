@@ -40,7 +40,8 @@ public class Board extends JPanel implements ActionListener {
   // Instansiasi food
   private Food food = new Food();
 
-  private 
+  // Instansiasi score
+  private Score score = new Score();
 
   // Bentuk board
   public Board() {
@@ -126,8 +127,11 @@ public class Board extends JPanel implements ActionListener {
       System.out.println("intersection");
       // Menambahkan ukuran snake +1
       snake.setJoints(snake.getJoints() + 1);
+      // menambah score
+      score.addScore();
       // membuat makanan baru pada board
       food.createFood();
+
     }
   }
 
@@ -162,6 +166,7 @@ public class Board extends JPanel implements ActionListener {
 
     // If the game has ended, then we can stop our timer
     if (!inGame) {
+      score.resetScore();
       timer.stop();
     }
   }
@@ -179,8 +184,8 @@ public class Board extends JPanel implements ActionListener {
       checkCollisions();
       snake.move();
 
-      System.out
-          .println(snake.getSnakeX(0) + " " + snake.getSnakeY(0) + " " + food.getFoodX() + ", " + food.getFoodY());
+      System.out.println(snake.getSnakeX(0) + " " + snake.getSnakeY(0) + " " + food.getFoodX() + ", " + food.getFoodY()
+          + " " + score.getScore());
     }
     // Repaint or 'render' our screen
     repaint();
@@ -246,10 +251,10 @@ public class Board extends JPanel implements ActionListener {
     g.drawString(message, (BOARDWIDTH - metrics.stringWidth(message)) / 2, BOARDHEIGHT / 2);
 
     System.out.println("Game Ended");
-
   }
 
   private boolean proximity(int a, int b, int closeness) {
     return Math.abs((long) a - b) <= closeness;
   }
+
 }
