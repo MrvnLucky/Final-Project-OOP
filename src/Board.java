@@ -19,11 +19,11 @@ public class Board extends JPanel implements ActionListener {
   // TODO: Implement a way for the player to win
 
   // Memberikan lebar dan tinggi board
-  private final static int BOARDWIDTH = 1000;
-  private final static int BOARDHEIGHT = 1000;
+  private final static int BOARDWIDTH = 600;
+  private final static int BOARDHEIGHT = 600;
 
   // Memberikan ukuran pixel
-  private final static int PIXELSIZE = 25;
+  private final static int PIXELSIZE = 6;
 
   // Mencari total pixel dari luas board/luas pixel
   private final static int TOTALPIXELS = (BOARDWIDTH * BOARDHEIGHT) / (PIXELSIZE * PIXELSIZE);
@@ -31,17 +31,22 @@ public class Board extends JPanel implements ActionListener {
   // Memberikan kondisi awal kalau game sedang berlangsung
   private boolean inGame = true;
 
+  private boolean isFirstLaunch = true;
+
   // Timer untuk mengukur tick dari game
   private Timer timer;
 
   // Set speed game snake, semakin kecil angka semakin cepat snake jalan
-  private static int speed = 45;
+  private static int speed = 50;
 
   // Instansiasi snake
   private Snake snake = new Snake();
 
   // Instansiasi food
   private Food food = new Food();
+
+  // Instansiasi score
+  private Score score = new Score();
 
   // Bentuk board
   public Board() {
@@ -86,7 +91,10 @@ public class Board extends JPanel implements ActionListener {
           g.fillRect(snake.getSnakeX(i), snake.getSnakeY(i), PIXELSIZE, PIXELSIZE);
         }
       }
-
+      Font font = new Font("Times New Roman", Font.BOLD, 14);
+      g.setColor(Color.WHITE);
+      g.setFont(font);
+      g.drawString(String.valueOf(score.getScore()), 580, 15);
       // Mensinkronkan graphics
       Toolkit.getDefaultToolkit().sync();
     } else {
@@ -95,6 +103,9 @@ public class Board extends JPanel implements ActionListener {
   }
 
   void initializeGame() {
+    // Reset score
+    score.resetScore();
+
     // Memberikan jumlah tubuh snake
     snake.setJoints(3); // set our snake's initial size
 
@@ -122,13 +133,16 @@ public class Board extends JPanel implements ActionListener {
 
   void checkFoodCollisions() {
 
-    if ((proximity(snake.getSnakeX(0), food.getFoodX(), 20)) && (proximity(snake.getSnakeY(0), food.getFoodY(), 20))) {
+    if ((proximity(snake.getSnakeX(0), food.getFoodX(), 2)) && (proximity(snake.getSnakeY(0), food.getFoodY(), 2))) {
 
       System.out.println("intersection");
       // Menambahkan ukuran snake +1
       snake.setJoints(snake.getJoints() + 1);
+      // menambah score
+      score.addScore();
       // membuat makanan baru pada board
       food.createFood();
+
     }
   }
 
@@ -180,8 +194,8 @@ public class Board extends JPanel implements ActionListener {
       checkCollisions();
       snake.move();
 
-      System.out
-          .println(snake.getSnakeX(0) + " " + snake.getSnakeY(0) + " " + food.getFoodX() + ", " + food.getFoodY());
+      System.out.println("(" + snake.getSnakeX(0) + "," + snake.getSnakeY(0) + ") (" + food.getFoodX() + ","
+          + food.getFoodY() + ") " + score.getScore());
     }
     // Repaint or 'render' our screen
     repaint();
@@ -264,9 +278,26 @@ public class Board extends JPanel implements ActionListener {
     String direction="<Left>      <RIGHT>         <UP>       <DOWN>";
     String message6= "Press SPACEBAR to Start";
 
+    String message = "Game over !";
+    String scoreMsg = "Your score : " + score.getScore();
+    String leaderMsg = "Leader Board : ";
+    String[] leaderScoreMsg = new String[3];
+
+    score.saveScore();
+
+    for (int i = 0; i < score.getLeader().size(); i++) {
+      leaderScoreMsg[i] = "Rank " + (i + 1) + " : " + String.valueOf(score.getLeader().get(i));
+      if (i == 2) {
+        break;
+      }
+    }
 
     // Create a new font instance
-    Font font = new Font("Courier New" ,Font.BOLD, 50);
+    Font font = new Font("Times New Roman", Font.BOLD, 20);
+    FontMetrics metrics = getFontMetrics(font);
+
+    // Create a new font instance
+    Font font0 = new Font("Courier New" ,Font.BOLD, 50);
     Font font1 = new Font("Arial" ,Font.BOLD, 30);
     Font font2 = new Font("Courier New" ,Font.BOLD, 20);
     Font font3 = new Font("Courier New" ,Font.BOLD, 20);
@@ -289,7 +320,8 @@ public class Board extends JPanel implements ActionListener {
     // Set the color of the text to red, and set the font
 
     g.setColor(Color.GREEN);
-    g.setFont(font);
+    g.setColor(Color.RED);
+    g.setFont(font0);
     g.setFont(font1);
     g.setFont(font2);
     g.setFont(font3);
@@ -298,7 +330,7 @@ public class Board extends JPanel implements ActionListener {
 
     // Draw the message to the board
     g.setColor(Color.GREEN);
-    g.setFont(font);
+    g.setFont(font0);
     g.drawString(message, 350, 100);
     g.setColor(Color.GRAY);
     g.setFont(font1);
@@ -321,6 +353,25 @@ public class Board extends JPanel implements ActionListener {
     g.setColor(Color.RED);
     g.setFont(taptostart);
     g.drawString(message6,250,600);
+    g.drawString(message, (BOARDWIDTH - metrics.stringWidth(message)) / 2, 100);
+
+    Font font1 = new Font("Times New Roman", Font.BOLD, 16);
+    FontMetrics metrics1 = getFontMetrics(font1);
+
+    g.setColor(Color.GREEN);
+    g.setFont(font1);
+    g.drawString(leaderMsg, (BOARDWIDTH - metrics1.stringWidth(leaderMsg)) / 2, 280);
+
+    for (int i = 0; i < score.getLeader().size(); i++) {
+      g.drawString(leaderScoreMsg[i], (BOARDWIDTH - metrics1.stringWidth(leaderScoreMsg[i])) / 2, 300 + (i * 20));
+      if (i == 2) {
+        break;
+      }
+    }
+
+    g.setColor(Color.WHITE);
+    g.setFont(font1);
+    g.drawString(scoreMsg, (BOARDWIDTH - metrics1.stringWidth(scoreMsg)) / 2, 500);
 
     System.out.println("Game Ended");
 
@@ -329,4 +380,5 @@ public class Board extends JPanel implements ActionListener {
   private boolean proximity(int a, int b, int closeness) {
     return Math.abs((long) a - b) <= closeness;
   }
+
 }
