@@ -59,79 +59,78 @@
    ## Classes Used
 
    1. **SnakeGame (Main program)** - `SnakeGame.java` 
-   - Main class program untuk menjalankan app
+      - Main class program untuk menjalankan app
 
    2. **Snake** - `Snake.java` 
-   - Class object Snake
-   - 7 Variable Class
-      - x: int[]
-      - y: int[] 
-      - movingLeft: bool
-      - movingRight: bool
-      - movingUp: bool
-      - movingDown: bool 
-      - joints: int
-   - 15 Methods 
-      - getSnakeX() - Untuk mengambil koordinat x Snake
-      - getSnakeY() - Untuk mengambil koordinat y Snake
-      - setSnakeX() - Untuk set koordinat x Snake
-      - setSnakeY() - Untuk set koordinat y Snake
-      - getJoints() - Untuk mengambil ukuran joint Snake
-      - setJoints() - Untuk set ukura joint Snake
-      - isMovingLeft() - Untuk mendapat nilai boolean jika Snake bergerak ke kiri
-      - setMovingLeft() - Untuk set boolean Snake bergerak ke kiri
-      - isMovingRight() - Untuk mendapat nilai boolean jika Snake bergerak ke kanan
-      - setMovingRight() - Untuk set boolean Snake bergerak ke kanan
-      - isMovingUp() - Untuk mendapat nilai boolean jika Snake bergerak ke atas
-      - setMovingUp() - Untuk set boolean Snake bergerak ke atas
-      - isMovingDown() - Untuk mendapat nilai boolean jika Snake bergerak ke bawah
-      - setMovingDown() - Untuk set boolean Snake bergerak ke bawah
-      - move() - Untuk menggerakan snake dari head ke tail 
+      - Class object Snake
+      - 7 Variable Class
+         - x: int[]
+         - y: int[] 
+         - movingLeft: bool
+         - movingRight: bool
+         - movingUp: bool
+         - movingDown: bool 
+         - joints: int
+      - 15 Methods 
+         - getSnakeX() - Untuk mengambil koordinat x Snake
+         - getSnakeY() - Untuk mengambil koordinat y Snake
+         - setSnakeX() - Untuk set koordinat x Snake
+         - setSnakeY() - Untuk set koordinat y Snake
+         - getJoints() - Untuk mengambil ukuran joint Snake
+         - setJoints() - Untuk set ukura joint Snake
+         - isMovingLeft() - Untuk mendapat nilai boolean jika Snake bergerak ke kiri
+         - setMovingLeft() - Untuk set boolean Snake bergerak ke kiri
+         - isMovingRight() - Untuk mendapat nilai boolean jika Snake bergerak ke kanan
+         - setMovingRight() - Untuk set boolean Snake bergerak ke kanan
+         - isMovingUp() - Untuk mendapat nilai boolean jika Snake bergerak ke atas
+         - setMovingUp() - Untuk set boolean Snake bergerak ke atas
+         - isMovingDown() - Untuk mendapat nilai boolean jika Snake bergerak ke bawah
+         - setMovingDown() - Untuk set boolean Snake bergerak ke bawah
+         - move() - Untuk menggerakan snake dari head ke tail 
 
    3. **Food** - `Food.java` 
-   - Class object Food
-   - 4 Variable Class
-      - snake: Snake
-      - foodX: int
-      - foodY: int
-      - RANDOMPOSITION = int 
-   - 3 Methods 
-      - getFoodX() - Untuk mengambil koordinat x Food
-      - getFoodY() - Untuk mengambil koordinat y Food
-      - createFood() - Untuk membuat Food baru dengan koordinat random
+      - Class object Food
+      - 4 Variable Class
+         - snake: Snake
+         - foodX: int
+         - foodY: int
+         - RANDOMPOSITION = int 
+      - 3 Methods 
+         - getFoodX() - Untuk mengambil koordinat x Food
+         - getFoodY() - Untuk mengambil koordinat y Food
+         - createFood() - Untuk membuat Food baru dengan koordinat random
 
    4. **Board** - `Board.java` 
-   - Class object Board. Merupakan area bermain, logic game, start screen, dan end screen yang mengekstensi `JPanel` dan mengimplementasi `ActionListener` untuk input keyboard. 
-   - Class object Board
-   - 8 Variable Class
-      - BOARDWIDHT: int
-      - BOARDHEIGHT: int
-      - PIXELSIZE: int
-      - TOTALPIXELS: int
-      - inGame: bool
-      - isFirstLaunch: bool
-      - timer: Timer
-      - speed: int
-      - snake: Snake
-      - food: Food
-      - score: Score
-   - 11 Methods
-      - draw()- Untuk memunculkan objek yang ada di dalam game - Untuk memunculkan graphic yang telah ditentukan 
-      - initializeGame() - Untuk memulai game
-      - getAllDots() - Untuk mendapatkan TOTALPIXELS
-      - checkFoodCollisions() - Untuk memeriksa apakah Food telah dimakan oleh Snake
-      - checkCollisions - Untuk memeriksa apakah Snake menabrak dinding ataupun badannya sendiri
-      - getDotSize() - Untuk mengambil ukuran pixel
-      - endGame() - Untuk memberikan keadaan akhir game, jumlah score, leaderboard, dan end screen
-      - instructionScreen() - Untuk membuat instruksi pada start screen
-      - proximity() - Untuk menentukan luas area sentuh Snake dan Food
-      - paintComponent() - Untuk memasukkan componen ke screen
-      - actionPerformed() - Untuk memberikan record di console
+      - Class object Board. Merupakan area bermain, logic game, start screen, dan end screen yang mengekstensi `JPanel` dan mengimplementasi `ActionListener` untuk input keyboard. 
+      - 8 Variable Class
+         - BOARDWIDHT: int
+         - BOARDHEIGHT: int
+         - PIXELSIZE: int
+         - TOTALPIXELS: int
+         - inGame: bool
+         - isFirstLaunch: bool
+         - timer: Timer
+         - speed: int
+         - snake: Snake
+         - food: Food
+         - score: Score
+      - 11 Methods
+         - draw()- Untuk memunculkan objek yang ada di dalam game - Untuk memunculkan graphic yang telah ditentukan 
+         - initializeGame() - Untuk memulai game
+         - getAllDots() - Untuk mendapatkan TOTALPIXELS
+         - checkFoodCollisions() - Untuk memeriksa apakah Food telah dimakan oleh Snake
+         - checkCollisions - Untuk memeriksa apakah Snake menabrak dinding ataupun badannya sendiri
+         - getDotSize() - Untuk mengambil ukuran pixel
+         - endGame() - Untuk memberikan keadaan akhir game, jumlah score, leaderboard, dan end screen
+         - instructionScreen() - Untuk membuat instruksi pada start screen
+         - proximity() - Untuk menentukan luas area sentuh Snake dan Food
+         - paintComponent() - Untuk memasukkan componen ke screen
+         - actionPerformed() - Untuk memberikan record di console
 
    5. **Keys** - `Keys.java` 
-   - Class Keyboard Listener
-   - 1 method
-      - keyPressed() - Untuk menginisiasi gerak yang akan diberikan kepada snake berdasarkan input keyboard
+      - Class Keyboard Listener
+      - 1 method
+         - keyPressed() - Untuk menginisiasi gerak yang akan diberikan kepada snake berdasarkan input keyboard
 
    ![UML](/images/UML.png)
 
