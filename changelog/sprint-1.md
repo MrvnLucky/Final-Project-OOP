@@ -20,9 +20,9 @@
 
 | ID  | Title/Desc                         | Asignee | Status |
 | --- | ---------------------------------- | ------- | ------ |
-| 1.1 | Create the Board for the S n e c c | Matthew | DONE   |
-| 1.2 | Create the object S n e c c        | Ananda  | DONE   |
-| 1.3 | S n e c c Movement                 | Marvin  | DONE   |
+| 1.1 | Create the Board for the Snake     | Matthew | DONE   |
+| 1.2 | Create the object Snake            | Ananda  | DONE   |
+| 1.3 | Snake Movement                     | Marvin  | DONE   |
 
 ## Retrospective  
 
@@ -33,6 +33,6 @@
 
 | ID  | Title/Desc                                     | Asignee |  
 | --- | ---------------------------------------------- | ------- |  
-| 2.1 | Create the object Æ p e l                      | Ananda  |
-| 2.2 | Create Æ p e l spawn Randomize                 | Matthew |
+| 2.1 | Create the object Food                         | Ananda  |
+| 2.2 | Create Food spawn Randomize                    | Matthew |
 | 2.3 | Create Keyboard input function                 | Marvin  |  

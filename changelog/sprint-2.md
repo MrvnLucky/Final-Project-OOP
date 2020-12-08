@@ -9,7 +9,7 @@
 | 140810190063  | Ananda Sapta Awedhana  |
 
 ## Sprint Overview
-| Planned (n)   | Completed (n) |
+| Planned (3)   | Completed (3) |
 | ------------- |-------------- |
 | 3             | 3             |
 
@@ -17,8 +17,8 @@
 
 | ID  | Title/Desc                                     | Asignee | Status | 
 | --- | ---------------------------------------------- | ------- | ------ | 
-| 2.1 | Create the object Æ p e l                      | Ananda  |  DONE  |
-| 2.2 | Create Æ p e l spawn Randomize                 | Matthew |  DONE  |
+| 2.1 | Create the object Food                         | Ananda  |  DONE  |
+| 2.2 | Create Food spawn Randomize                    | Matthew |  DONE  |
 | 2.3 | Create Keyboard input function                 | Marvin  |  DONE  |  
 
 ## Retrospective 
@@ -31,6 +31,6 @@
 
 | ID  | Title/Desc                                     | Asignee |  
 | --- | ---------------------------------------------- | ------- |  
-| 3.1 | Count the score based on the Æ p e l           | Ananda  |
+| 3.1 | Count the score based on the Food              | Ananda  |
 | 3.2 | Create instruction screen                      | Matthew |
-| 3.3 | Create credits & Scoreboard/Leaderboard screen | Marvin  |
+| 3.3 | Create Scoreboard/Leaderboard screen           | Marvin  |
