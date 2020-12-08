@@ -192,7 +192,7 @@ public class Board extends JPanel implements ActionListener {
   }
 
   private class Keys extends KeyAdapter {
-
+    
     @Override
     public void keyPressed(KeyEvent e) {
 
@@ -229,7 +229,7 @@ public class Board extends JPanel implements ActionListener {
         snake.setMovingLeft(false);
         snake.setMovingUp(false);
 
-        initializeGame();
+      initializeGame();
       }
     }
   }
@@ -256,5 +256,5 @@ public class Board extends JPanel implements ActionListener {
   private boolean proximity(int a, int b, int closeness) {
     return Math.abs((long) a - b) <= closeness;
   }
-
+  
 }
