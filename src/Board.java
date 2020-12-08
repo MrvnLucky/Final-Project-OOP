@@ -91,7 +91,7 @@ public class Board extends JPanel implements ActionListener {
       Font font = new Font("Times New Roman", Font.BOLD, 14);
       g.setColor(Color.WHITE);
       g.setFont(font);
-      g.drawString(String.valueOf(score.getScore()), 590, 20);
+      g.drawString(String.valueOf(score.getScore()), 580, 15);
       // Mensinkronkan graphics
       Toolkit.getDefaultToolkit().sync();
     } else {
@@ -249,6 +249,8 @@ public class Board extends JPanel implements ActionListener {
     String leaderMsg = "Leader Board : ";
     String[] leaderScoreMsg = new String[3];
 
+    score.saveScore();
+
     for (int i = 0; i < score.getLeader().size(); i++) {
       leaderScoreMsg[i] = "Rank " + (i + 1) + " : " + String.valueOf(score.getLeader().get(i));
       if (i == 2) {
@@ -257,27 +259,33 @@ public class Board extends JPanel implements ActionListener {
     }
 
     // Create a new font instance
-    Font font = new Font("Times New Roman", Font.BOLD, 14);
+    Font font = new Font("Times New Roman", Font.BOLD, 20);
     FontMetrics metrics = getFontMetrics(font);
 
     // Set the color of the text to red, and set the font
-    g.setColor(Color.red);
+    g.setColor(Color.RED);
     g.setFont(font);
 
     // Draw the message to the board
     g.drawString(message, (BOARDWIDTH - metrics.stringWidth(message)) / 2, 100);
 
-    g.drawString(leaderMsg, (BOARDWIDTH - metrics.stringWidth(leaderMsg)) / 2, 280);
+    Font font1 = new Font("Times New Roman", Font.BOLD, 16);
+    FontMetrics metrics1 = getFontMetrics(font1);
 
-    score.saveScore();
+    g.setColor(Color.GREEN);
+    g.setFont(font1);
+    g.drawString(leaderMsg, (BOARDWIDTH - metrics1.stringWidth(leaderMsg)) / 2, 280);
+
     for (int i = 0; i < score.getLeader().size(); i++) {
-      g.drawString(leaderScoreMsg[i], (BOARDWIDTH - metrics.stringWidth(leaderScoreMsg[i])) / 2, 300 + (i * 20));
+      g.drawString(leaderScoreMsg[i], (BOARDWIDTH - metrics1.stringWidth(leaderScoreMsg[i])) / 2, 300 + (i * 20));
       if (i == 2) {
         break;
       }
     }
 
-    g.drawString(scoreMsg, (BOARDWIDTH - metrics.stringWidth(scoreMsg)) / 2, 500);
+    g.setColor(Color.WHITE);
+    g.setFont(font1);
+    g.drawString(scoreMsg, (BOARDWIDTH - metrics1.stringWidth(scoreMsg)) / 2, 500);
 
     System.out.println("Game Ended");
 
