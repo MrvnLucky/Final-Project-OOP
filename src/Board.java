@@ -32,15 +32,13 @@ public class Board extends JPanel implements ActionListener {
   private Timer timer;
 
   // Set speed game snake, semakin kecil angka semakin cepat snake jalan
-  private static int speed = 80;
+  private static int speed = 50;
 
   // Instansiasi snake
   private Snake snake = new Snake();
 
   // Instansiasi food
   private Food food = new Food();
-
-  private 
 
   // Bentuk board
   public Board() {
@@ -95,7 +93,7 @@ public class Board extends JPanel implements ActionListener {
 
   void initializeGame() {
     // Memberikan jumlah tubuh snake
-    snake.setJoints(3); // set our snake's initial size
+    snake.setJoints(5); // set our snake's initial size
 
     // Membuat tubuh snake
     for (int i = 0; i < snake.getJoints(); i++) {
@@ -246,7 +244,6 @@ public class Board extends JPanel implements ActionListener {
     g.drawString(message, (BOARDWIDTH - metrics.stringWidth(message)) / 2, BOARDHEIGHT / 2);
 
     System.out.println("Game Ended");
-
   }
 
   private boolean proximity(int a, int b, int closeness) {
