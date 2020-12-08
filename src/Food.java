@@ -1,4 +1,3 @@
-
 public class Food {
 
     private Snake snake = new Snake();

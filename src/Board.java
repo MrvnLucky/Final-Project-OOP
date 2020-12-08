@@ -32,13 +32,15 @@ public class Board extends JPanel implements ActionListener {
   private Timer timer;
 
   // Set speed game snake, semakin kecil angka semakin cepat snake jalan
-  private static int speed = 45;
+  private static int speed = 80;
 
   // Instansiasi snake
   private Snake snake = new Snake();
 
   // Instansiasi food
   private Food food = new Food();
+
+  private 
 
   // Bentuk board
   public Board() {
