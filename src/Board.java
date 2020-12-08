@@ -13,7 +13,6 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import javax.swing.Timer;
 
-
 @SuppressWarnings("serial")
 public class Board extends JPanel implements ActionListener {
   // TODO: Implement a way for the player to win
@@ -29,7 +28,7 @@ public class Board extends JPanel implements ActionListener {
   private final static int TOTALPIXELS = (BOARDWIDTH * BOARDHEIGHT) / (PIXELSIZE * PIXELSIZE);
 
   // Memberikan kondisi awal kalau game sedang berlangsung
-  private boolean inGame = true;
+  private boolean inGame = false;
 
   private boolean isFirstLaunch = true;
 
@@ -56,7 +55,6 @@ public class Board extends JPanel implements ActionListener {
     setFocusable(true);
 
     setPreferredSize(new Dimension(BOARDWIDTH, BOARDHEIGHT));
-
     initializeGame();
   }
 
@@ -74,7 +72,13 @@ public class Board extends JPanel implements ActionListener {
 
   // Memasukkan snake
   void draw(Graphics g) {
-    if (inGame == true) {
+    if (isFirstLaunch == true) {
+      inGame = false;
+      timer.stop();
+      instructionScreen(g);
+    }
+
+    if (inGame == true && isFirstLaunch == false) {
 
       // Food
       g.setColor(Color.RED);
@@ -97,17 +101,23 @@ public class Board extends JPanel implements ActionListener {
       g.drawString(String.valueOf(score.getScore()), 580, 15);
       // Mensinkronkan graphics
       Toolkit.getDefaultToolkit().sync();
-    } else {
+    }
+    // else if (inGame == false && isFirstLaunch == true) {
+    // instructionScreen(g);
+    // isFirstLaunch = false;
+    // }
+    else if (inGame == false && isFirstLaunch == false) {
       endGame(g);
     }
   }
 
   void initializeGame() {
+
     // Reset score
     score.resetScore();
 
     // Memberikan jumlah tubuh snake
-    snake.setJoints(3); // set our snake's initial size
+    snake.setJoints(5); // set our snake's initial size
 
     // Membuat tubuh snake
     for (int i = 0; i < snake.getJoints(); i++) {
@@ -122,6 +132,7 @@ public class Board extends JPanel implements ActionListener {
     food.createFood();
 
     // Set timer untuk mengukur tick dalam game
+    inGame = true;
     timer = new Timer(speed, this);
     timer.start();
   }
@@ -240,53 +251,23 @@ public class Board extends JPanel implements ActionListener {
         snake.setMovingUp(false);
 
         initializeGame();
+        inGame = true;
+        isFirstLaunch = false;
       }
     }
   }
 
-  // void endGame(Graphics g) {
-
-  //   // Create a message telling the player the game is over
-  //   String message = "Game over";
-
-  //   // Create a new font instance
-  //   Font font = new Font("Times New Roman", Font.BOLD, 30);
-  //   FontMetrics metrics = getFontMetrics(font);
-
-  //   // Set the color of the text to red, and set the font
-  //   g.setColor(Color.red);
-  //   g.setFont(font);
-
-  //   // Draw the message to the board
-  //   g.drawString(message, (BOARDWIDTH - metrics.stringWidth(message)) / 2, BOARDHEIGHT / 2);
-
-  //   System.out.println("Game Ended");
-
-  // }
-
   void endGame(Graphics g) {
 
-    // Create a message telling the player the game is over
-    Rectangle instrBox = new Rectangle(Board.BOARDWIDTH / 6 - 20 ,Board.BOARDHEIGHT/5 + 50,700,400);
-    String message = "S N E C C";
-    String message1= "Instruction";
-    String message2= "To play the game, you basically press";
-    String message3= "Directional arrow";
-    String message4= "in your keyboard to change";
-    String message5= "Your S n e c c Direction, That is all";
-    String arrow ="\u2190     \u2192      \u2191      \u2193";
-    String direction="<Left>      <RIGHT>         <UP>       <DOWN>";
-    String message6= "Press SPACEBAR to Start";
-
     String message = "Game over !";
-    String scoreMsg = "Your score : " + score.getScore();
+    String yourScoreMsg = "Your score : " + score.getScore();
     String leaderMsg = "Leader Board : ";
-    String[] leaderScoreMsg = new String[3];
-
+    String[] scoreMsg = new String[3];
+    String restartMsg = "Press SPACEBAR to play again";
     score.saveScore();
 
     for (int i = 0; i < score.getLeader().size(); i++) {
-      leaderScoreMsg[i] = "Rank " + (i + 1) + " : " + String.valueOf(score.getLeader().get(i));
+      scoreMsg[i] = "Rank " + (i + 1) + " : " + String.valueOf(score.getLeader().get(i));
       if (i == 2) {
         break;
       }
@@ -295,75 +276,19 @@ public class Board extends JPanel implements ActionListener {
     // Create a new font instance
     Font font = new Font("Times New Roman", Font.BOLD, 20);
     FontMetrics metrics = getFontMetrics(font);
-
-    // Create a new font instance
-    Font font0 = new Font("Courier New" ,Font.BOLD, 50);
-    Font font1 = new Font("Arial" ,Font.BOLD, 30);
-    Font font2 = new Font("Courier New" ,Font.BOLD, 20);
-    Font font3 = new Font("Courier New" ,Font.BOLD, 20);
-    Font font4 = new Font("Courier New" ,Font.BOLD, 20);
-    Font font5 = new Font("Courier New" ,Font.BOLD, 20);
-    Font taptostart = new Font("Arial Narrow" ,Font.ITALIC, 50);
-    Font arrowFont = new Font("Sans Serif",Font.BOLD,50);
-    Font directionFont = new Font("Courrier New",Font.BOLD,20);
-
-    // FontMetrics metrics = getFontMetrics(font);
-    // FontMetrics metrics1 = getFontMetrics(font1);
-    // FontMetrics metrics2 = getFontMetrics(font2);
-    // FontMetrics metrics3 = getFontMetrics(font3);
-    // FontMetrics metrics4 = getFontMetrics(font4);
-    
-    Graphics2D g2d = (Graphics2D) g;
-    g2d.draw(instrBox);
-    g2d.setColor(Color.green);
-    // g2d.SetRectangle(instrBox);
-    // Set the color of the text to red, and set the font
-
-    g.setColor(Color.GREEN);
-    g.setColor(Color.RED);
-    g.setFont(font0);
-    g.setFont(font1);
-    g.setFont(font2);
-    g.setFont(font3);
-    g.setFont(font4);
-    
-
-    // Draw the message to the board
-    g.setColor(Color.GREEN);
-    g.setFont(font0);
-    g.drawString(message, 350, 100);
-    g.setColor(Color.GRAY);
-    g.setFont(font1);
-    g.drawString(message1, 410, 200);
-    g.setColor(Color.LIGHT_GRAY);
-    g.setFont(font2);
-    g.drawString(message2, 250, 300);
-    g.setFont(font3);
-    g.drawString(message3, 250, 330);
-    g.setFont(font4);
-    g.drawString(message4, 250, 360);
-    g.setFont(font5);
-    g.drawString(message5, 250,390);
-
-    g.setFont(arrowFont);
-    g.drawString(arrow, 300, 450);
-    g.setFont(directionFont);
-    g.drawString(direction, 300,480);
-
-    g.setColor(Color.RED);
-    g.setFont(taptostart);
-    g.drawString(message6,250,600);
-    g.drawString(message, (BOARDWIDTH - metrics.stringWidth(message)) / 2, 100);
-
     Font font1 = new Font("Times New Roman", Font.BOLD, 16);
     FontMetrics metrics1 = getFontMetrics(font1);
 
+    g.setColor(Color.RED);
+    g.setFont(font);
+    g.drawString(message, (BOARDWIDTH - metrics.stringWidth(message)) / 2, 100);
+
     g.setColor(Color.GREEN);
     g.setFont(font1);
-    g.drawString(leaderMsg, (BOARDWIDTH - metrics1.stringWidth(leaderMsg)) / 2, 280);
+    g.drawString(leaderMsg, (BOARDWIDTH - metrics1.stringWidth(leaderMsg)) / 2, 240);
 
     for (int i = 0; i < score.getLeader().size(); i++) {
-      g.drawString(leaderScoreMsg[i], (BOARDWIDTH - metrics1.stringWidth(leaderScoreMsg[i])) / 2, 300 + (i * 20));
+      g.drawString(scoreMsg[i], (BOARDWIDTH - metrics1.stringWidth(scoreMsg[i])) / 2, 260 + (i * 20));
       if (i == 2) {
         break;
       }
@@ -371,9 +296,86 @@ public class Board extends JPanel implements ActionListener {
 
     g.setColor(Color.WHITE);
     g.setFont(font1);
-    g.drawString(scoreMsg, (BOARDWIDTH - metrics1.stringWidth(scoreMsg)) / 2, 500);
+    g.drawString(yourScoreMsg, (BOARDWIDTH - metrics1.stringWidth(yourScoreMsg)) / 2, 400);
+
+    g.setColor(Color.RED);
+    g.setFont(font);
+    g.drawString(restartMsg, (BOARDWIDTH - metrics.stringWidth(restartMsg)) / 2, 500);
 
     System.out.println("Game Ended");
+
+  }
+
+  void instructionScreen(Graphics g) {
+
+    // Create a message telling the player the game is over
+    Rectangle instrBox = new Rectangle(Board.BOARDWIDTH / 6 - 20, Board.BOARDHEIGHT / 5 + 50, 420, 240);
+    String message = "S N E C C";
+    String message1 = "Instruction";
+    String message2 = "To play the game, you basically press";
+    String message3 = "Directional arrow";
+    String message4 = "in your keyboard to change";
+    String message5 = "Your S n e c c Direction, That is all";
+    String arrow = "\u2190     \u2192      \u2191      \u2193";
+    String direction = "<Left>      <RIGHT>         <UP>       <DOWN>";
+    String message6 = "Press SPACEBAR to Start";
+
+    // Create a new font instance
+    Font font0 = new Font("Courier New", Font.BOLD, 30);
+    Font font1 = new Font("Arial", Font.BOLD, 18);
+    Font font2 = new Font("Courier New", Font.BOLD, 12);
+    Font font3 = new Font("Courier New", Font.BOLD, 12);
+    Font font4 = new Font("Courier New", Font.BOLD, 12);
+    Font font5 = new Font("Courier New", Font.BOLD, 12);
+    Font taptostart = new Font("Arial Narrow", Font.ITALIC, 30);
+    Font arrowFont = new Font("Sans Serif", Font.BOLD, 30);
+    Font directionFont = new Font("Courrier New", Font.BOLD, 12);
+
+    // FontMetrics metrics = getFontMetrics(font);
+    // FontMetrics metrics1 = getFontMetrics(font1);
+    // FontMetrics metrics2 = getFontMetrics(font2);
+    // FontMetrics metrics3 = getFontMetrics(font3);
+    // FontMetrics metrics4 = getFontMetrics(font4);
+
+    Graphics2D g2d = (Graphics2D) g;
+    g2d.draw(instrBox);
+    g2d.setColor(Color.green);
+    // g2d.SetRectangle(instrBox);
+    // Set the color of the text to red, and set the font
+
+    g.setColor(Color.GREEN);
+
+    g.setFont(font0);
+    g.setFont(font1);
+    g.setFont(font2);
+    g.setFont(font3);
+    g.setFont(font4);
+
+    // Draw the message to the board
+    g.setColor(Color.GREEN);
+    g.setFont(font0);
+    g.drawString(message, 210, 60);
+    g.setColor(Color.GRAY);
+    g.setFont(font1);
+    g.drawString(message1, 246, 120);
+    g.setColor(Color.LIGHT_GRAY);
+    g.setFont(font2);
+    g.drawString(message2, 150, 180);
+    g.setFont(font3);
+    g.drawString(message3, 150, 198);
+    g.setFont(font4);
+    g.drawString(message4, 150, 216);
+    g.setFont(font5);
+    g.drawString(message5, 150, 234);
+
+    g.setFont(arrowFont);
+    g.drawString(arrow, 180, 270);
+    g.setFont(directionFont);
+    g.drawString(direction, 180, 288);
+
+    g.setColor(Color.RED);
+    g.setFont(taptostart);
+    g.drawString(message6, 150, 360);
 
   }
 
