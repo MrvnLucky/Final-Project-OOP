@@ -16,17 +16,19 @@ public class Board extends JPanel implements ActionListener {
   // TODO: Implement a way for the player to win
 
   // Memberikan lebar dan tinggi board
-  private final static int BOARDWIDTH = 1000;
-  private final static int BOARDHEIGHT = 1000;
+  private final static int BOARDWIDTH = 600;
+  private final static int BOARDHEIGHT = 600;
 
   // Memberikan ukuran pixel
-  private final static int PIXELSIZE = 25;
+  private final static int PIXELSIZE = 6;
 
   // Mencari total pixel dari luas board/luas pixel
   private final static int TOTALPIXELS = (BOARDWIDTH * BOARDHEIGHT) / (PIXELSIZE * PIXELSIZE);
 
   // Memberikan kondisi awal kalau game sedang berlangsung
   private boolean inGame = true;
+
+  private boolean isFirstLaunch = true;
 
   // Timer untuk mengukur tick dari game
   private Timer timer;
@@ -95,8 +97,11 @@ public class Board extends JPanel implements ActionListener {
   }
 
   void initializeGame() {
+    // Reset score
+    score.resetScore();
+
     // Memberikan jumlah tubuh snake
-    snake.setJoints(5); // set our snake's initial size
+    snake.setJoints(3); // set our snake's initial size
 
     // Membuat tubuh snake
     for (int i = 0; i < snake.getJoints(); i++) {
@@ -122,7 +127,7 @@ public class Board extends JPanel implements ActionListener {
 
   void checkFoodCollisions() {
 
-    if ((proximity(snake.getSnakeX(0), food.getFoodX(), 20)) && (proximity(snake.getSnakeY(0), food.getFoodY(), 20))) {
+    if ((proximity(snake.getSnakeX(0), food.getFoodX(), 2)) && (proximity(snake.getSnakeY(0), food.getFoodY(), 2))) {
 
       System.out.println("intersection");
       // Menambahkan ukuran snake +1
@@ -166,7 +171,6 @@ public class Board extends JPanel implements ActionListener {
 
     // If the game has ended, then we can stop our timer
     if (!inGame) {
-      score.resetScore();
       timer.stop();
     }
   }
