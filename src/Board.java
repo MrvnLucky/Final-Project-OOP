@@ -32,7 +32,7 @@ public class Board extends JPanel implements ActionListener {
   private Timer timer;
 
   // Set speed game snake, semakin kecil angka semakin cepat snake jalan
-  private static int speed = 80;
+  private static int speed = 50;
 
   // Instansiasi snake
   private Snake snake = new Snake();
@@ -96,7 +96,7 @@ public class Board extends JPanel implements ActionListener {
 
   void initializeGame() {
     // Memberikan jumlah tubuh snake
-    snake.setJoints(3); // set our snake's initial size
+    snake.setJoints(5); // set our snake's initial size
 
     // Membuat tubuh snake
     for (int i = 0; i < snake.getJoints(); i++) {
