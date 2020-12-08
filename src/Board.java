@@ -88,7 +88,10 @@ public class Board extends JPanel implements ActionListener {
           g.fillRect(snake.getSnakeX(i), snake.getSnakeY(i), PIXELSIZE, PIXELSIZE);
         }
       }
-
+      Font font = new Font("Times New Roman", Font.BOLD, 14);
+      g.setColor(Color.WHITE);
+      g.setFont(font);
+      g.drawString(String.valueOf(score.getScore()), 590, 20);
       // Mensinkronkan graphics
       Toolkit.getDefaultToolkit().sync();
     } else {
