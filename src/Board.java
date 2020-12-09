@@ -262,7 +262,7 @@ public class Board extends JPanel implements ActionListener {
     String message = "Game over !";
     String yourScoreMsg = "Your score : " + score.getScore();
     String leaderMsg = "Leader Board : ";
-    String[] scoreMsg = new String[3];
+    String[] scoreMsg = new String[10];
     String restartMsg = "Press SPACEBAR to play again";
     score.saveScore();
 
@@ -289,7 +289,7 @@ public class Board extends JPanel implements ActionListener {
 
     for (int i = 0; i < score.getLeader().size(); i++) {
       g.drawString(scoreMsg[i], (BOARDWIDTH - metrics1.stringWidth(scoreMsg[i])) / 2, 220 + (i * 20));
-      if (i == 2) {
+      if (i == 9) {
         break;
       }
     }
