@@ -213,7 +213,7 @@ public class Board extends JPanel implements ActionListener {
   }
 
   private class Keys extends KeyAdapter {
-    
+
     @Override
     public void keyPressed(KeyEvent e) {
 
@@ -268,7 +268,7 @@ public class Board extends JPanel implements ActionListener {
 
     for (int i = 0; i < score.getLeader().size(); i++) {
       scoreMsg[i] = "Rank " + (i + 1) + " : " + String.valueOf(score.getLeader().get(i));
-      if (i == 2) {
+      if (i == 9) {
         break;
       }
     }
@@ -285,10 +285,10 @@ public class Board extends JPanel implements ActionListener {
 
     g.setColor(Color.GREEN);
     g.setFont(font1);
-    g.drawString(leaderMsg, (BOARDWIDTH - metrics1.stringWidth(leaderMsg)) / 2, 240);
+    g.drawString(leaderMsg, (BOARDWIDTH - metrics1.stringWidth(leaderMsg)) / 2, 200);
 
     for (int i = 0; i < score.getLeader().size(); i++) {
-      g.drawString(scoreMsg[i], (BOARDWIDTH - metrics1.stringWidth(scoreMsg[i])) / 2, 260 + (i * 20));
+      g.drawString(scoreMsg[i], (BOARDWIDTH - metrics1.stringWidth(scoreMsg[i])) / 2, 220 + (i * 20));
       if (i == 2) {
         break;
       }
@@ -296,11 +296,11 @@ public class Board extends JPanel implements ActionListener {
 
     g.setColor(Color.WHITE);
     g.setFont(font1);
-    g.drawString(yourScoreMsg, (BOARDWIDTH - metrics1.stringWidth(yourScoreMsg)) / 2, 400);
+    g.drawString(yourScoreMsg, (BOARDWIDTH - metrics1.stringWidth(yourScoreMsg)) / 2, 500);
 
     g.setColor(Color.RED);
     g.setFont(font);
-    g.drawString(restartMsg, (BOARDWIDTH - metrics.stringWidth(restartMsg)) / 2, 500);
+    g.drawString(restartMsg, (BOARDWIDTH - metrics.stringWidth(restartMsg)) / 2, 550);
 
     System.out.println("Game Ended");
 
@@ -382,5 +382,5 @@ public class Board extends JPanel implements ActionListener {
   private boolean proximity(int a, int b, int closeness) {
     return Math.abs((long) a - b) <= closeness;
   }
-  
+
 }
