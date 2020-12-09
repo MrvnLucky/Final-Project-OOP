@@ -48,11 +48,11 @@
    2. **Open terminal**
    3. **Compile class SnakeGame**
    ```
-   javac src/SnakeGame.java
+   javac SnakeGame.java
    ```
    4. **Run SnakeGame**
    ```
-   java src/SnakeGame
+   java SnakeGame
    ```
    5. **Selamat bermain**
 
